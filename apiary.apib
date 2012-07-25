@@ -1,0 +1,47 @@
+HOST: http://api.7digital.com/2.0
+
+--- Inbox API v2.0 ---
+
+--
+Inbox Queries
+--
+list tracks in a users inbox
+
+GET /inbox/tracks?offset=0&count=5
+< 200
+< Content-Type: application/xml
+    <tracks>
+        <track>
+            <artist>
+                <name>Florence + the Machine</name>
+            </artist>
+            <release type="album">
+                <title>Lungs</title>
+            </release>
+            <title>Dog Days Are Over</title>
+        </track>
+    </tracks>
+
+A list of releases in the inbox
+GET /inbox/releases?offset=0&count=5
+<releases>
+    <release type="album">
+    <artist>
+                <name>Florence + the Machine</name>
+            </artist>
+                <title>Lungs</title>
+            </release>
+            <release type="album">
+            <artist>
+                <name>Oasis</name>
+            </artist>
+                <title>Wonderwall</title>
+            </release>
+</releases>
+
+-- Payment Resources --
+This resource allows you to submit payment information to process your *shopping cart* items
+POST /payment
+{ "cc": "12345678900", "cvc": "123", "expiry": "0112" }
+< 200
+{ "receipt": "/payment/receipt/1" }
