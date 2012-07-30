@@ -5,43 +5,262 @@ HOST: http://api.7digital.com/2.0
 --
 Inbox Queries
 --
-list tracks in a users inbox
-
-GET /inbox/tracks?offset=0&count=5
+list tracks purchased tracks in a users inbox
+GET /userinbox/1/items/?page=0&pageSize=10&category=streamable&label=from%20grandma&search=blahblehblih
 < 200
 < Content-Type: application/xml
-    <tracks>
-        <track>
-            <artist>
-                <name>Florence + the Machine</name>
+<response status="ok">
+    <pageInfo>
+        <pageNumber>0</pageNumber>
+        <pageSize>5</pageSize>
+        <total>654216546</total>
+    </pageInfo>
+    <items>
+        <item id="3983">
+            <title>It Was...</title>
+            <type>track</type>
+            <categories>
+                <category>free</category>
+                <category>streamable</category>
+                <category>downloadable</category>
+                <category>matched</category>
+            </categories>
+            <labels>
+                <label>this rocks</label>
+                <label>from grandma</label>
+            </labels>
+            <by id="132">
+                <name>Lemon Jelly</name>
+            </by>
+            <bundle id="39874">
+                <title>‘64-’95</title>
+                <type>Album</type>
+            </bundle>
+            <image>http://cdn.7static.com/static/img/sleeveart/00/000/373/0000037397_50.jpg</image>
+            <track id="3084393">
+                <url>http://www.7digital.com/artists/lemon-jelly/64-95/01-It-Was-</url>
+            </track>
+            <delivery>
+                <stream>
+                    <url>http://stream.blaaa.s.y.z</url>
+                </stream>
+                <download remaining="30">
+                    <url>http://download.blaaa</url>
+                </download>
+            </delivery>
+        </item>
+        <item id="3983">
+            <type>ebook</type>
+            <title>Harry Potter IV</title>
+            <categories>
+                <category>free</category>
+                <category>ebook</category>
+                <category>downloadable</category>
+            </categories>
+            <labels>
+                <label>this rocks</label>
+                <label>from grandma</label>
+            </labels>
+            <title>It Was...</title>
+            <by id="132">
+                <name>J. K. Rowling</name>
+            </by>
+            <bundle id="39874">
+                <title>Harry Potter Collection</title>
+            </bundle>
+            <image>http://cdn.7static.com/static/img/sleeveart/00/000/373/0000037397_50.jpg</image>
+            <ebook id="3084393">
+                <url>http://www.7digital.com/artists/college/a-real-hero-ep/01-A-Real-Hero</url>
+            </ebook>
+            <delivery>
+                <download>
+                    <url>http://stream.blaaa.s.y.z</url>
+                </download>
+            </delivery>
+        </item>
+        <item id="3983">
+            <type>track</type>
+            <title>User genereated title</title>
+            <categories>
+                <category>upload</category>
+                <category>streamable</category>
+            </categories>
+            <by id="24332">
+                <name>The Garage Band</name>
             </artist>
-            <release type="album">
-                <title>Lungs</title>
-            </release>
-            <title>Dog Days Are Over</title>
+            <bundle id="697091">
+                <title>My Garage Hits</title>
+            </bundle>
+            <delivery>
+                <stream>
+                    <url>http://stream.blaaa.s.y.z</url>
+                </stream>
+            </delivery>
         </track>
     </tracks>
+</tracksPage>
 
-A list of releases in the inbox
-GET /inbox/releases?offset=0&count=5
-<releases>
-    <release type="album">
-    <artist>
-                <name>Florence + the Machine</name>
-            </artist>
-                <title>Lungs</title>
-            </release>
-            <release type="album">
-            <artist>
-                <name>Oasis</name>
-            </artist>
-                <title>Wonderwall</title>
-            </release>
-</releases>
+list tracks in a users inbox grouped by artist
 
--- Payment Resources --
-This resource allows you to submit payment information to process your *shopping cart* items
-POST /payment
-{ "cc": "12345678900", "cvc": "123", "expiry": "0112" }
+GET /userinbox/1/artists/?offset=0&count=5&category=streamable&label=grandma&search=doijfofij
 < 200
-{ "receipt": "/payment/receipt/1" }
+< Content-Type: application/xml
+<artistsPage>
+    <pageInfo>
+        <offset>0</offset>
+        <artistCount>5</artistCount>
+        <totalArtistCount>654216546</totalArtistCount>
+    </pageInfo>
+    <artists>
+        <artist id="132" sdid="19196">
+            <name>Lemon Jelly</name>
+            <appearsAs>Lemon Jelly</appearsAs>
+            <url>http://www.7digital.com/artists/lemon-jelly</url>
+        </artist>
+        <artist id="132" sdid="19196">
+            <name>Lemon Jelly</name>
+            <appearsAs>Lemon Jelly</appearsAs>
+            <url>http://www.7digital.com/artists/lemon-jelly</url>
+        </artist>
+        <artist id="54" sdid="1257507">
+            <name>College &amp; Electric Youth</name>
+            <appearsAs>College &amp; Electric Youth</appearsAs>
+            <url>http://www.7digital.com/artists/college-and-electric-youth</url>
+        </artist>
+        <artist id="24332">
+            <name>The Garage Band</name>
+        </artist>
+    </artists>
+</artistsPage>
+
+
+--
+create entry in user inbox
+--
+POST /userinbox/1/track
+<tracks source="match">
+    <source>
+        <type>
+    </source>
+    <track id="3084393">
+        <categories>
+            <category>match</category>
+        </categories>
+        <title>A Real Hero</title>
+        <trackNumber>1</trackNumber>
+        <duration>268</duration>
+        <url>http://www.7digital.com/artists/college/a-real-hero-ep/01-A-Real-Hero</url>
+        <artist id="1257507">
+            <name>College &amp; Electric Youth</name>
+            <appearsAs>College &amp; Electric Youth</appearsAs>
+            <url>http://www.7digital.com/artists/college-and-electric-youth</url>
+        </artist>
+        <release sdid="697091">
+            <title>A Real Hero EP</title>
+            <type>Album</type>
+            <url>http://www.7digital.com/artists/college/a-real-hero-ep/?partner=712</url>
+            <image>http://cdn.7static.com/static/img/sleeveart/00/006/970/0000697091_50.jpg</image>
+            <releaseDate>2010-01-11T00:00:00Z</releaseDate>
+        </release>
+        <delivery>
+            <stream>
+                <url>http://stream.blaaa.s.y.z</url>
+            </stream>
+        </delivery>
+    </track>
+</tracks>
+< 200
+< Content-Type: application/xml
+<tracks>
+    <track inboxId="3983" id="3084393">
+        <categories>
+            <category>shared</category>
+            <category>purchase</category>
+        </categories>
+        <title>A Real Hero</title>
+        <trackNumber>1</trackNumber>
+        <duration>268</duration>
+        <url>http://www.7digital.com/artists/college/a-real-hero-ep/01-A-Real-Hero</url>
+        <artist inboxId="54" id="1257507">
+            <name>College &amp; Electric Youth</name>
+            <appearsAs>College &amp; Electric Youth</appearsAs>
+            <url>http://www.7digital.com/artists/college-and-electric-youth</url>
+        </artist>
+        <release inboxId="2343" id="697091">
+            <title>A Real Hero EP</title>
+            <type>Album</type>
+            <url>http://www.7digital.com/artists/college/a-real-hero-ep/?partner=712</url>
+            <image>http://cdn.7static.com/static/img/sleeveart/00/006/970/0000697091_50.jpg</image>
+            <releaseDate>2010-01-11T00:00:00Z</releaseDate>
+        </release>
+        <delivery>
+            <stream>
+                <url>http://stream.blaaa.s.y.z</url>
+            </stream>
+        </delivery>
+    </track>
+</tracks>
+
+(In case of an uploaded track, the input won't have attribs "sdid":)
+
+(upload track:)
+<tracks>
+    <track inboxId="3983">
+        <categories>
+            <category>upload</category>
+        </categories>
+        <title>User genereated title</title>
+        <trackNumber>1</trackNumber>
+        <duration>268</duration>
+        <artist inboxId="24332">
+            <name>The Garage Band</name>
+        </artist>
+        <release inboxId="697091">
+            <title>My Garage Hits</title>
+        </release>
+        <delivery>
+            <stream>
+                <url>http://stream.blaaa.s.y.z</url>
+            </stream>
+        </delivery>
+    </track>
+</tracks>
+
+
+====================================================================================== SCAN&MATCH API ===================================================================================================
+send match to a users inbox
+--
+POST /userinbox/1/trackMatch
+<matchSubmission type="fingerprint">32rjfiojoi3448rfj3dn398jd9jd</matchSubmission>
+<matchSubmission type="tag">
+    <track>
+        <title>It Was...</title>
+        <trackNumber>1</trackNumber>
+        <duration>23</duration>
+        <artist>
+            <name>Lemon Jelly</name>
+            <appearsAs>Lemon Jelly</appearsAs>
+        </artist>
+        <release>
+            <title>‘64-’95</title>
+        </release>
+    </track>
+</matchSubmission>
+< 200
+< Content-Type: application/xml
+<matchResult success="true">
+    <nextAction>
+        <type method="fingerprint">match</type>
+    </nextAction>
+</matchResult>
+<matchResult success="false">
+    <nextAction>
+        <type method="tag">match</type>
+    </nextAction>
+</matchResult>
+<matchResult success="false">
+    <nextAction>
+        <type>upload</type>
+    </nextAction>
+</matchResult>
+
