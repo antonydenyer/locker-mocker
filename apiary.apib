@@ -100,39 +100,6 @@ GET /userinbox/1/items/?page=0&pageSize=10&category=streamable&label=from%20gran
     </tracks>
 </tracksPage>
 
-list tracks in a users inbox grouped by artist
-
-GET /userinbox/1/artists/?offset=0&count=5&category=streamable&label=grandma&search=doijfofij
-< 200
-< Content-Type: application/xml
-<artistsPage>
-    <pageInfo>
-        <offset>0</offset>
-        <artistCount>5</artistCount>
-        <totalArtistCount>654216546</totalArtistCount>
-    </pageInfo>
-    <artists>
-        <artist id="132" sdid="19196">
-            <name>Lemon Jelly</name>
-            <appearsAs>Lemon Jelly</appearsAs>
-            <url>http://www.7digital.com/artists/lemon-jelly</url>
-        </artist>
-        <artist id="132" sdid="19196">
-            <name>Lemon Jelly</name>
-            <appearsAs>Lemon Jelly</appearsAs>
-            <url>http://www.7digital.com/artists/lemon-jelly</url>
-        </artist>
-        <artist id="54" sdid="1257507">
-            <name>College &amp; Electric Youth</name>
-            <appearsAs>College &amp; Electric Youth</appearsAs>
-            <url>http://www.7digital.com/artists/college-and-electric-youth</url>
-        </artist>
-        <artist id="24332">
-            <name>The Garage Band</name>
-        </artist>
-    </artists>
-</artistsPage>
-
 
 --
 create entry in user inbox
