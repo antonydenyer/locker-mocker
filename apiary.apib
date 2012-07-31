@@ -58,7 +58,7 @@ GET /userinbox/1/items/?page=0&pageSize=10&category=streamable&label=from%20gran
                 <category>downloadable</category>
             </categories>
             <labels>
-                <label>this rocks</label>
+                <label>this ro7digitalcks</label>
                 <label>from grandma</label>
             </labels>
             <title>It Was...</title>
@@ -87,7 +87,7 @@ GET /userinbox/1/items/?page=0&pageSize=10&category=streamable&label=from%20gran
             </categories>
             <by id="24332">
                 <name>The Garage Band</name>
-            </artist>
+            </by>
             <bundle id="697091">
                 <title>My Garage Hits</title>
             </bundle>
@@ -96,77 +96,99 @@ GET /userinbox/1/items/?page=0&pageSize=10&category=streamable&label=from%20gran
                     <url>http://stream.blaaa.s.y.z</url>
                 </stream>
             </delivery>
-        </track>
-    </tracks>
-</tracksPage>
+        </item>
+    </items>
+</response>
 
 
 --
 create entry in user inbox
 --
-POST /userinbox/1/track
-<tracks source="match">
+POST /userinbox/1/items
+<items>
     <source>
-        <type>
+        <type>purchase</type>
+        <purchase>
+            <date>2010-01-11T00:00:00Z</date>
+        </purchase>
     </source>
-    <track id="3084393">
-        <categories>
-            <category>match</category>
-        </categories>
+    <item>
         <title>A Real Hero</title>
-        <trackNumber>1</trackNumber>
-        <duration>268</duration>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/006/970/0000697091_50.jpg</image>
         <url>http://www.7digital.com/artists/college/a-real-hero-ep/01-A-Real-Hero</url>
-        <artist id="1257507">
-            <name>College &amp; Electric Youth</name>
-            <appearsAs>College &amp; Electric Youth</appearsAs>
-            <url>http://www.7digital.com/artists/college-and-electric-youth</url>
-        </artist>
-        <release sdid="697091">
+        <by id="1257507">
+            <name>College &amp; Electric Youth</na
+        </by>
+        <bundle id="697091">
             <title>A Real Hero EP</title>
             <type>Album</type>
-            <url>http://www.7digital.com/artists/college/a-real-hero-ep/?partner=712</url>
-            <image>http://cdn.7static.com/static/img/sleeveart/00/006/970/0000697091_50.jpg</image>
-            <releaseDate>2010-01-11T00:00:00Z</releaseDate>
-        </release>
+        </bundle>
+        <track id="494857">
+            <url>http://www.7digital.com/artists/lemon-jelly/64-95/01-It-Was-</url>
+        </track>
         <delivery>
             <stream>
                 <url>http://stream.blaaa.s.y.z</url>
             </stream>
         </delivery>
-    </track>
-</tracks>
+    </item>
+</items>
+<items>
+    <source>
+        <type>match</type>
+        <match>
+            <method>tag</method>
+            <date>2010-01-11T00:00:00Z</date>
+        </match>
+    </source>
+    <item>
+        <title>A Real Hero</title>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/006/970/0000697091_50.jpg</image>
+        <url>http://www.7digital.com/artists/college/a-real-hero-ep/01-A-Real-Hero</url>
+        <by id="1257507">
+            <name>College & Electric Youth</name>
+        </by>
+        <bundle id="697091">
+            <title>A Real Hero EP</title>
+            <type>Album</type>
+        </bundle>
+        <track id="3084393">
+            <url>http://www.7digital.com/artists/lemon-jelly/64-95/01-It-Was-</url>
+        </track>
+        <delivery>
+            <stream>
+                <url>http://stream.blaaa.s.y.z</url>
+            </stream>
+        </delivery>
+    </item>
+</items>
 < 200
 < Content-Type: application/xml
-<tracks>
-    <track inboxId="3983" id="3084393">
+<items>
+    <item id="3983">
         <categories>
             <category>shared</category>
             <category>purchase</category>
         </categories>
         <title>A Real Hero</title>
-        <trackNumber>1</trackNumber>
-        <duration>268</duration>
         <url>http://www.7digital.com/artists/college/a-real-hero-ep/01-A-Real-Hero</url>
-        <artist inboxId="54" id="1257507">
-            <name>College &amp; Electric Youth</name>
-            <appearsAs>College &amp; Electric Youth</appearsAs>
-            <url>http://www.7digital.com/artists/college-and-electric-youth</url>
-        </artist>
-        <release inboxId="2343" id="697091">
+        <by id="1257507">
+            <name>College & Electric Youth</name>
+        </by>
+        <bundle id="697091">
             <title>A Real Hero EP</title>
             <type>Album</type>
-            <url>http://www.7digital.com/artists/college/a-real-hero-ep/?partner=712</url>
-            <image>http://cdn.7static.com/static/img/sleeveart/00/006/970/0000697091_50.jpg</image>
-            <releaseDate>2010-01-11T00:00:00Z</releaseDate>
-        </release>
+        </bundle>
+        <track id="3084393">
+            <url>http://www.7digital.com/artists/lemon-jelly/64-95/01-It-Was-</url>
+        </track>
         <delivery>
             <stream>
                 <url>http://stream.blaaa.s.y.z</url>
             </stream>
         </delivery>
-    </track>
-</tracks>
+    </item>
+</items>
 
 (In case of an uploaded track, the input won't have attribs "sdid":)
 
@@ -192,6 +214,37 @@ POST /userinbox/1/track
         </delivery>
     </track>
 </tracks>
+
+=========================================================================== CATEGORIES =====================================================================================
+--
+list categories & labels in a users inbox
+GET /userinbox/1/groups
+< 200
+< Content-Type: application/xml
+<response status="ok">
+    <categories>
+        <category id="4">
+            <name>uploaded</name>
+        </category>
+        <category id="1">
+            <name>purchased</name>
+        </category>
+        <category id="3">
+            <name>matched</name>
+        </category>
+        <category id="2">
+            <name>free</name>
+        </category>
+    </categories>
+    <labels>
+        <label id="203">
+            <name>this rocks</name>
+        </label>
+        <label id="4949">
+            <name>granny's</name>
+        </label>
+    </labels>
+</response>
 
 
 ====================================================================================== SCAN&MATCH API ===================================================================================================
